@@ -1,6 +1,6 @@
-package br.gov.caixa.hackaton.repository;
+package br.gov.caixa.hackaton.repository.remote;
 
-import br.gov.caixa.hackaton.entity.Produto;
+import br.gov.caixa.hackaton.entity.remote.Produto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

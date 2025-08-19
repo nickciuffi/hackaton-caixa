@@ -1,7 +1,7 @@
 package br.gov.caixa.hackaton.controller;
 
-import br.gov.caixa.hackaton.entity.Produto;
-import br.gov.caixa.hackaton.repository.ProdutoRepository;
+import br.gov.caixa.hackaton.entity.remote.Produto;
+import br.gov.caixa.hackaton.repository.remote.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

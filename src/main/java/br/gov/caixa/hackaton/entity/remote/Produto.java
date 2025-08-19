@@ -1,4 +1,4 @@
-package br.gov.caixa.hackaton.entity;
+package br.gov.caixa.hackaton.entity.remote;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,7 +24,7 @@ public class Produto {
     @Column(name = "NO_PRODUTO")
     private String noProduto;
 
-    @Column(name = "PC_TAXA_JUROS", precision = 15, scale = 5)
+    @Column(name = "PC_TAXA_JUROS", precision = 10, scale = 9)
     private BigDecimal pcTaxaJuros;
 
     @Column(name = "NU_MINIMO_MESES")
@@ -33,9 +33,9 @@ public class Produto {
     @Column(name = "NU_MAXIMO_MESES")
     private Short nuMaximoMeses;
 
-    @Column(name = "VR_MINIMO", precision = 15, scale = 5)
+    @Column(name = "VR_MINIMO", precision = 18, scale = 2)
     private BigDecimal vrMinimo;
 
-    @Column(name = "VR_MAXIMO", precision = 15, scale = 5)
+    @Column(name = "VR_MAXIMO", precision = 18, scale = 2)
     private BigDecimal vrMaximo;
 }

@@ -2,9 +2,9 @@ package br.gov.caixa.hackaton.service;
 
 import br.gov.caixa.hackaton.dto.simulacao.SimulacaoRequestDTO;
 import br.gov.caixa.hackaton.dto.simulacao.SimulacaoResponseDTO;
-import br.gov.caixa.hackaton.entity.Produto;
+import br.gov.caixa.hackaton.entity.remote.Produto;
 import br.gov.caixa.hackaton.exception.ProdutoNaoEncontradoException;
-import br.gov.caixa.hackaton.repository.ProdutoRepository;
+import br.gov.caixa.hackaton.repository.remote.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
