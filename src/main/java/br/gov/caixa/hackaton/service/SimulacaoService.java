@@ -3,6 +3,7 @@ package br.gov.caixa.hackaton.service;
 import br.gov.caixa.hackaton.dto.simulacao.SimulacaoRequestDTO;
 import br.gov.caixa.hackaton.dto.simulacao.SimulacaoResponseDTO;
 import br.gov.caixa.hackaton.entity.Produto;
+import br.gov.caixa.hackaton.exception.ProdutoNaoEncontradoException;
 import br.gov.caixa.hackaton.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,9 @@ public class SimulacaoService {
 
         Produto prodAdequado = produtoRepository.BuscarProdutoParaSimulacao(req.getPrazo(), req.getValorDesejado());
 
+        if(prodAdequado == null) {
+            throw new ProdutoNaoEncontradoException();
+        }
         SimulacaoResponseDTO res = SimulacaoResponseDTO
                 .builder()
                 .idSimulacao(123)

@@ -24,7 +24,7 @@ public class Produto {
     @Column(name = "NO_PRODUTO")
     private String noProduto;
 
-    @Column(name = "PC_TAXA_JUROS")
+    @Column(name = "PC_TAXA_JUROS", precision = 15, scale = 5)
     private BigDecimal pcTaxaJuros;
 
     @Column(name = "NU_MINIMO_MESES")
@@ -33,9 +33,9 @@ public class Produto {
     @Column(name = "NU_MAXIMO_MESES")
     private Short nuMaximoMeses;
 
-    @Column(name = "VR_MINIMO")
+    @Column(name = "VR_MINIMO", precision = 15, scale = 5)
     private BigDecimal vrMinimo;
 
-    @Column(name = "VR_MAXIMO")
+    @Column(name = "VR_MAXIMO", precision = 15, scale = 5)
     private BigDecimal vrMaximo;
 }
