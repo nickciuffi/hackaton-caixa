@@ -9,7 +9,7 @@ import br.gov.caixa.hackaton.dto.simulacao.SimulacaoResponseDTO;
 import br.gov.caixa.hackaton.service.SimulacaoService;
 import br.gov.caixa.hackaton.utils.PaginacaoUtils;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,9 +17,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/simulacao")
+@AllArgsConstructor
 public class SimulacaoController {
 
-    @Autowired
     private SimulacaoService simulacaoService;
 
     @PostMapping("/realizar")
@@ -31,10 +31,11 @@ public class SimulacaoController {
     @GetMapping("/")
     public ResponseEntity<ApiResponse<PaginacaoDTO<SimulacaoDTO>>> consultarSimulacoesComPaginacao(@Valid @ModelAttribute ConsultarSimulacoesRequestDTO req){
         List<SimulacaoDTO> res = simulacaoService.consultarSimulacoes();
+        PaginacaoDTO<SimulacaoDTO> resPaginado = PaginacaoUtils.gerarPaginacao(res, req.getPagina(), req.getQtdRegistrosPagina());
         return ResponseEntity.ok()
                 .body(new ApiResponse<>(
-                        PaginacaoUtils.gerarPaginacao(res, req.getPagina(), req.getQtdRegistrosPagina()),
-                        "Simulações consultadas com sucesso!"
+                        resPaginado,
+                        !resPaginado.getRegistros().isEmpty() ? "Simulações consultadas com sucesso!" : "Página vazia!"
                 ));
     }
 }

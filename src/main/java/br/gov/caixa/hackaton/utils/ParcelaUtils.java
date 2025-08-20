@@ -7,6 +7,8 @@ import java.util.List;
 
 public class ParcelaUtils {
 
+    private ParcelaUtils(){}
+
     public static BigDecimal calcularTotalParcelas(List<ParcelaDTO> parcelas){
 
         BigDecimal total = new BigDecimal(0);

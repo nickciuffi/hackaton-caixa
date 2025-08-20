@@ -10,6 +10,8 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 @EnableJpaRepositories(
@@ -24,9 +26,13 @@ public class RemoteJPAConfiguration {
             EntityManagerFactoryBuilder entityManagerFactoryBuilder,
             @Qualifier("remoteDataSource") DataSource dataSource
     ){
+        Map<String, Object> props = new HashMap<>();
+        props.put("hibernate.hbm2ddl.auto", "none");
+        props.put("hibernate.dialect", "org.hibernate.dialect.SQLServer2012Dialect");
         return entityManagerFactoryBuilder
                 .dataSource(dataSource)
                 .packages("br.gov.caixa.hackaton.entity.remote")
+                .properties(props)
                 .build();
     }
 

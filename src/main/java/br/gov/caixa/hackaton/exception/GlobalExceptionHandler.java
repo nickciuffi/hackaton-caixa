@@ -15,12 +15,12 @@ import java.util.stream.Collectors;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(ProdutoNaoEncontradoException.class)
-    public ResponseEntity<?> handleProdutoNaoEncontradoException(ProdutoNaoEncontradoException e) {
+    public ResponseEntity<ApiResponse<Object>> handleProdutoNaoEncontradoException(ProdutoNaoEncontradoException e) {
         return ResponseEntity.badRequest().body(new ApiResponse<>(e.getMessage()));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<?> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+    public ResponseEntity<ApiResponse<Object>> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         List<String> mensagens = e.getBindingResult()
                 .getFieldErrors()
                 .stream()
@@ -31,7 +31,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<String> handleGenericException(Exception ex) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro interno do servidor.");
+    public ResponseEntity<ApiResponse<Object>> handleGenericException(Exception ex) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<>("Erro interno do servidor."));
     }
 }

@@ -2,7 +2,7 @@ package br.gov.caixa.hackaton.controller;
 
 import br.gov.caixa.hackaton.entity.remote.Produto;
 import br.gov.caixa.hackaton.repository.remote.ProdutoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,9 +12,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/produtos")
+@AllArgsConstructor
 public class ProdutoController {
 
-    @Autowired
     private ProdutoRepository produtoRepository;
 
     @GetMapping("")

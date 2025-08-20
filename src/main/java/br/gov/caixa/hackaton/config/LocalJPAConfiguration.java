@@ -10,6 +10,8 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 @EnableJpaRepositories(
@@ -24,9 +26,13 @@ public class LocalJPAConfiguration {
             EntityManagerFactoryBuilder entityManagerFactoryBuilder,
             @Qualifier("localDataSource") DataSource dataSource
             ){
+        Map<String, Object> props = new HashMap<>();
+        props.put("hibernate.hbm2ddl.auto", "update");
+        props.put("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
         return entityManagerFactoryBuilder
                 .dataSource(dataSource)
                 .packages("br.gov.caixa.hackaton.entity.local")
+                .properties(props)
                 .build();
     }
 

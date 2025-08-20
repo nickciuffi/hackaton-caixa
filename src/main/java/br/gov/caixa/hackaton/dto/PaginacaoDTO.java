@@ -1,6 +1,5 @@
 package br.gov.caixa.hackaton.dto;
 
-import br.gov.caixa.hackaton.dto.simulacao.SimulacaoDTO;
 import lombok.Data;
 
 import java.util.List;
