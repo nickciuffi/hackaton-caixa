@@ -1,12 +1,16 @@
 package br.gov.caixa.hackaton.entity.local;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NonNull;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 
 @Entity
 @Table(name = "simulacoes")
+@AllArgsConstructor
+@Data
 public class Simulacao {
 
     @Id
@@ -18,8 +22,15 @@ public class Simulacao {
     private BigDecimal valorDesejado;
 
     @Column(name = "NU_PRAZO")
-    private short prazo;
+    private Integer prazo;
 
     @Column(name = "VR_TOTAL_PARCELAS", precision = 18, scale = 2)
     private BigDecimal valorTotalParcelas;
+
+    @Column(name = "NO_TIPO_SIMULACAO")
+    private String tipo;
+
+    public Simulacao(BigDecimal valorDesejado, Integer prazo, BigDecimal valorTotalParcelas, String tipo){
+        this(null, valorDesejado, prazo, valorTotalParcelas, tipo);
+    }
 }

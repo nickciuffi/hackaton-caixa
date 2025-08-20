@@ -10,13 +10,11 @@ import java.util.List;
 @Builder
 public class SimulacaoResponseDTO {
 
-    private Integer idSimulacao;
-
     private Integer codigoProduto;
 
     private String descricaoProduto;
 
     private BigDecimal taxaJuros;
 
-    private List<String> resultadosSimulacao;
+    private List<ResultadoSimulacaoDTO> resultadosSimulacao;
 }
