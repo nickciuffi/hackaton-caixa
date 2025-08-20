@@ -1,6 +1,7 @@
 package br.gov.caixa.hackaton.service;
 
 import br.gov.caixa.hackaton.dto.simulacao.ResultadoSimulacaoDTO;
+import br.gov.caixa.hackaton.dto.simulacao.SimulacaoDTO;
 import br.gov.caixa.hackaton.dto.simulacao.SimulacaoRequestDTO;
 import br.gov.caixa.hackaton.dto.simulacao.SimulacaoResponseDTO;
 import br.gov.caixa.hackaton.entity.local.Simulacao;
@@ -77,5 +78,13 @@ public class SimulacaoService {
         return resultados;
     }
 
+    public List<SimulacaoDTO> consultarSimulacoes(){
+        List<Simulacao> simulacoes = simulacaoRepository.findAll();
+        List<SimulacaoDTO> dtos = new ArrayList<>();
+        for(Simulacao simulacaoEnt : simulacoes){
+            dtos.add(SimulacaoDTO.fromEntity(simulacaoEnt));
+        }
+        return dtos;
+    }
 
 }

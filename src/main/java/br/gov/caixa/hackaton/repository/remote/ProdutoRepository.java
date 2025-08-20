@@ -8,6 +8,6 @@ import java.math.BigDecimal;
 
 public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
 
-    @Query(value = "SELECT * FROM produto p WHERE ?1 BETWEEN p.NU_MINIMO_MESES AND p.NU_MAXIMO_MESES AND ?2 BETWEEN p.VR_MINIMO AND p.VR_MAXIMO", nativeQuery = true)
+    @Query(value = "SELECT * FROM produto p WHERE ?1 >= p.NU_MINIMO_MESES AND (?1 <= p.NU_MAXIMO_MESES OR p.nu_maximo_meses IS NULL) AND ?2 >= p.VR_MINIMO AND (?2 <= p.VR_MAXIMO OR p.vr_maximo IS NULL)", nativeQuery = true)
     public Produto BuscarProdutoParaSimulacao(Integer prazo, BigDecimal valor);
 }
