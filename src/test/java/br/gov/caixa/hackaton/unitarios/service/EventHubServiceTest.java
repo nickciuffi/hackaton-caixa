@@ -2,6 +2,7 @@ package br.gov.caixa.hackaton.unitarios.service;
 
 import br.gov.caixa.hackaton.config.eventhub.EventHubConfiguration;
 import br.gov.caixa.hackaton.dto.simulacao.ConsultarSimulacoesRequestDTO;
+import br.gov.caixa.hackaton.exception.ConversaoJsonException;
 import br.gov.caixa.hackaton.service.implementation.EventHubServiceImpl;
 import com.azure.messaging.eventhubs.EventData;
 import com.azure.messaging.eventhubs.EventDataBatch;
@@ -17,6 +18,7 @@ import reactor.core.publisher.Mono;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class EventHubServiceTest {
@@ -61,6 +63,21 @@ class EventHubServiceTest {
         eventHubService.enviar(dados);
 
         verify(producerMock).send(batchMock);
+    }
+
+    @Test
+    void enviarComErroNaConversaoJsonTest() {
+        GetterQueCausaErroNaConversaoJson dados = new GetterQueCausaErroNaConversaoJson();
+
+        assertThrows(ConversaoJsonException.class, () -> eventHubService.enviar(dados));
+
+    }
+
+    //não é possível mockar o ObjectMapper do jackson, por isso resolvi causar o erro naturalmente, com uma classe que não pode ser convertida para json
+    static class GetterQueCausaErroNaConversaoJson {
+        public String getValor() {
+            throw new RuntimeException("Erro no getter");
+        }
     }
 
 }

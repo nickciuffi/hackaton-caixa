@@ -25,7 +25,7 @@ public class LocalJPAConfiguration {
     LocalContainerEntityManagerFactoryBean localEntityManager(
             EntityManagerFactoryBuilder entityManagerFactoryBuilder,
             @Qualifier("localDataSource") DataSource dataSource
-            ){
+    ){
         Map<String, Object> props = new HashMap<>();
         props.put("hibernate.hbm2ddl.auto", "update");
         props.put("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
