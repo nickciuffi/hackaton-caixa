@@ -6,6 +6,9 @@ import br.gov.caixa.hackaton.dto.simulacao.ConsultarSimulacoesRequestDTO;
 import br.gov.caixa.hackaton.dto.simulacao.SimulacaoDTO;
 import br.gov.caixa.hackaton.dto.simulacao.SimulacaoRequestDTO;
 import br.gov.caixa.hackaton.dto.simulacao.SimulacaoResponseDTO;
+import br.gov.caixa.hackaton.dto.simulacao.data_prod.SimulacaoPorDataEProdDTO;
+import br.gov.caixa.hackaton.dto.simulacao.data_prod.SimulacaoPorDataEProdRequestDTO;
+import br.gov.caixa.hackaton.dto.simulacao.data_prod.SimulacaoPorDataEProdResponseDTO;
 import br.gov.caixa.hackaton.service.SimulacaoService;
 import br.gov.caixa.hackaton.utils.PaginacaoUtils;
 import jakarta.validation.Valid;
@@ -37,5 +40,11 @@ public class SimulacaoController {
                         resPaginado,
                         !resPaginado.getRegistros().isEmpty() ? "Simulações consultadas com sucesso!" : "Página vazia!"
                 ));
+    }
+
+    @GetMapping("/prod-data")
+    public ResponseEntity<ApiResponse<SimulacaoPorDataEProdResponseDTO>> consultarSimulacoesPorDataEProd(@Valid @ModelAttribute SimulacaoPorDataEProdRequestDTO req){
+        SimulacaoPorDataEProdResponseDTO res = SimulacaoPorDataEProdResponseDTO.builder().dataReferencia(req.getDataReferencia()).simulacoes(simulacaoService.consultarSimulacoesPorDataEProd(req)).build();
+        return ResponseEntity.ok().body(new ApiResponse<SimulacaoPorDataEProdResponseDTO>(res, "Simulações consultadas por produto e data com sucesso!"));
     }
 }

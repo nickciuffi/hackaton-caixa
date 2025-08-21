@@ -18,6 +18,8 @@ public class SimulacaoDTO {
 
     private BigDecimal valorTotalParcelas;
 
+    private String tipoSimulacao;
+
     public static SimulacaoDTO fromEntity(Simulacao ent){
         return SimulacaoDTO
                 .builder()
@@ -25,6 +27,7 @@ public class SimulacaoDTO {
                 .prazo(ent.getPrazo())
                 .valorDesejado(ent.getValorDesejado())
                 .valorTotalParcelas(ent.getValorTotalParcelas())
+                .tipoSimulacao(ent.getTipo())
                 .build();
     }
 }

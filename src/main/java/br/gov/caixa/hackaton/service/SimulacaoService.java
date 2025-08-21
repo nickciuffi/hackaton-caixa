@@ -1,11 +1,11 @@
 package br.gov.caixa.hackaton.service;
 
-import br.gov.caixa.hackaton.dto.simulacao.ResultadoSimulacaoDTO;
-import br.gov.caixa.hackaton.dto.simulacao.SimulacaoDTO;
-import br.gov.caixa.hackaton.dto.simulacao.SimulacaoRequestDTO;
-import br.gov.caixa.hackaton.dto.simulacao.SimulacaoResponseDTO;
+import br.gov.caixa.hackaton.dto.simulacao.*;
+import br.gov.caixa.hackaton.dto.simulacao.data_prod.SimulacaoPorDataEProdRequestDTO;
+import br.gov.caixa.hackaton.dto.simulacao.data_prod.SimulacaoPorDataEProdDTO;
 import br.gov.caixa.hackaton.entity.local.Simulacao;
 import br.gov.caixa.hackaton.entity.remote.Produto;
+import br.gov.caixa.hackaton.exception.NenhumaSimulacaoEncontradaException;
 import br.gov.caixa.hackaton.exception.ProdutoNaoEncontradoException;
 import br.gov.caixa.hackaton.repository.local.SimulacaoRepository;
 import br.gov.caixa.hackaton.repository.remote.ProdutoRepository;
@@ -17,6 +17,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +40,8 @@ public class SimulacaoService {
 
         List<ResultadoSimulacaoDTO> resultados = this.cadastrarSimulacoes(
                 this.gerarResultados(req.getValorDesejado(), req.getPrazo(), prodAdequado.getPcTaxaJuros()),
-                req
+                req,
+                prodAdequado
         );
 
         return SimulacaoResponseDTO
@@ -50,9 +53,37 @@ public class SimulacaoService {
                 .build();
     }
 
-    private List<ResultadoSimulacaoDTO> cadastrarSimulacoes(List<ResultadoSimulacaoDTO> simulacoes, SimulacaoRequestDTO req){
+    public List<SimulacaoDTO> consultarSimulacoes(){
+        List<Simulacao> simulacoes = simulacaoRepository.findAll();
+        List<SimulacaoDTO> dtos = new ArrayList<>();
+        for(Simulacao simulacaoEnt : simulacoes){
+            dtos.add(SimulacaoDTO.fromEntity(simulacaoEnt));
+        }
+        return dtos;
+    }
+
+    public List<SimulacaoPorDataEProdDTO> consultarSimulacoesPorDataEProd(SimulacaoPorDataEProdRequestDTO req){
+        LocalDate dataReq = LocalDate.parse(req.getDataReferencia(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        List<Simulacao> simulacoesEnt = simulacaoRepository.findSimulacaoPorDataEProduto(req.getCodigoProduto(), dataReq);
+
+        if(simulacoesEnt.isEmpty()) throw new NenhumaSimulacaoEncontradaException();
+
+        List<SimulacaoPorDataEProdDTO> dtos = new ArrayList<>();
+        for(Simulacao simulacaoEnt : simulacoesEnt){
+            dtos.add(SimulacaoPorDataEProdDTO.fromEntity(simulacaoEnt));
+        }
+
+        return dtos;
+    }
+
+    private List<ResultadoSimulacaoDTO> cadastrarSimulacoes(List<ResultadoSimulacaoDTO> simulacoes, SimulacaoRequestDTO req, Produto prod){
         for(ResultadoSimulacaoDTO simulacao : simulacoes){
-            Simulacao simulacaoEnt = new Simulacao(req.getValorDesejado(), req.getPrazo(), ParcelaUtils.calcularTotalParcelas(simulacao.getParcelas()), simulacao.getTipo());
+
+            Simulacao simulacaoEnt = new Simulacao(
+                    req.getValorDesejado(), req.getPrazo(), ParcelaUtils.calcularTotalParcelas(simulacao.getParcelas()),
+                    simulacao.getTipo(), LocalDate.now(), prod.getCoProduto(), prod.getNoProduto(),
+                    ParcelaUtils.calcularMediaPrestacao(simulacao.getParcelas()), prod.getPcTaxaJuros());
+
             Simulacao simulacaoSalva = simulacaoRepository.save(simulacaoEnt);
             simulacao.setIdSimulacao(simulacaoSalva.getIdSimulacao());
         }
@@ -72,15 +103,6 @@ public class SimulacaoService {
         resultados.add(resPRICE);
 
         return resultados;
-    }
-
-    public List<SimulacaoDTO> consultarSimulacoes(){
-        List<Simulacao> simulacoes = simulacaoRepository.findAll();
-        List<SimulacaoDTO> dtos = new ArrayList<>();
-        for(Simulacao simulacaoEnt : simulacoes){
-            dtos.add(SimulacaoDTO.fromEntity(simulacaoEnt));
-        }
-        return dtos;
     }
 
 }

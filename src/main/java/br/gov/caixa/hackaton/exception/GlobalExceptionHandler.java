@@ -1,6 +1,7 @@
 package br.gov.caixa.hackaton.exception;
 
 import br.gov.caixa.hackaton.dto.ApiResponse;
+import br.gov.caixa.hackaton.dto.simulacao.data_prod.SimulacaoPorDataEProdResponseDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -17,6 +18,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ProdutoNaoEncontradoException.class)
     public ResponseEntity<ApiResponse<Object>> handleProdutoNaoEncontradoException(ProdutoNaoEncontradoException e) {
         return ResponseEntity.badRequest().body(new ApiResponse<>(e.getMessage()));
+    }
+
+    @ExceptionHandler(NenhumaSimulacaoEncontradaException.class)
+    public ResponseEntity<ApiResponse<Object>> handleProdutoNaoEncontradoException(NenhumaSimulacaoEncontradaException e) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse<>(e.getMessage()));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

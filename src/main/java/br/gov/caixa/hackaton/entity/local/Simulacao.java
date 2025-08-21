@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "simulacoes")
@@ -32,7 +33,22 @@ public class Simulacao {
     @Column(name = "NO_TIPO_SIMULACAO")
     private String tipo;
 
-    public Simulacao(BigDecimal valorDesejado, Integer prazo, BigDecimal valorTotalParcelas, String tipo){
-        this(null, valorDesejado, prazo, valorTotalParcelas, tipo);
+    @Column(name = "DT_SIMULACAO")
+    private LocalDate dataSimulacao;
+
+    @Column(name = "CO_PRODUTO")
+    private Integer coProduto;
+
+    @Column(name = "NO_PRODUTO")
+    private String noProduto;
+
+    @Column(name = "VR_MEDIO_PRESTACAO", precision = 18, scale = 2)
+    private BigDecimal valorMedioPrestacao;
+
+    @Column(name = "PC_TAXA_JUROS", precision = 10, scale = 9)
+    private BigDecimal pcTaxaJuros;
+
+    public Simulacao(BigDecimal valorDesejado, Integer prazo, BigDecimal valorTotalParcelas, String tipo, LocalDate dataSimulacao, Integer coProduto, String noProduto, BigDecimal valorMedioPrestacao, BigDecimal pcTaxaJuros){
+        this(null, valorDesejado, prazo, valorTotalParcelas, tipo, dataSimulacao, coProduto, noProduto, valorMedioPrestacao, pcTaxaJuros);
     }
 }
