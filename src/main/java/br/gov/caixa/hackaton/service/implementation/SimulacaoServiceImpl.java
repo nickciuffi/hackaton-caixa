@@ -10,6 +10,7 @@ import br.gov.caixa.hackaton.exception.ProdutoNaoEncontradoException;
 import br.gov.caixa.hackaton.repository.local.SimulacaoRepository;
 import br.gov.caixa.hackaton.repository.remote.ProdutoRepository;
 import br.gov.caixa.hackaton.service.EventSenderService;
+import br.gov.caixa.hackaton.service.SimulacaoService;
 import br.gov.caixa.hackaton.strategy.CalculadorParcelas;
 import br.gov.caixa.hackaton.strategy.PRICEStrategy;
 import br.gov.caixa.hackaton.strategy.SACStrategy;
@@ -25,14 +26,13 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class SimulacaoService {
+public class SimulacaoServiceImpl implements SimulacaoService {
 
     private ProdutoRepository produtoRepository;
 
     private SimulacaoRepository simulacaoRepository;
 
     private EventSenderService eventSenderService;
-
 
     public SimulacaoResponseDTO realizarSimulacao(SimulacaoRequestDTO req){
 

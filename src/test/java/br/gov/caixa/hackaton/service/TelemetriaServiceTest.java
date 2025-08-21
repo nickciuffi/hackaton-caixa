@@ -3,7 +3,7 @@ package br.gov.caixa.hackaton.service;
 import br.gov.caixa.hackaton.dto.telemetria.ConsultarTelemetriaResponseDTO;
 import br.gov.caixa.hackaton.dto.telemetria.TelemetriaDTO;
 import br.gov.caixa.hackaton.repository.local.TelemetriaRepository;
-import br.gov.caixa.hackaton.service.implementation.TelemetriaService;
+import br.gov.caixa.hackaton.service.implementation.TelemetriaServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -25,7 +25,7 @@ public class TelemetriaServiceTest {
     private TelemetriaRepository telemetriaRepository;
 
     @InjectMocks
-    private TelemetriaService service;
+    private TelemetriaServiceImpl service;
 
     private static final String NOME_API = "/simulacao";
     private static final Long TEMPO_EXECUCAO = 123123L;

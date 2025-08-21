@@ -5,6 +5,7 @@ import br.gov.caixa.hackaton.dto.telemetria.ConsultarTelemetriaResponseDTO;
 import br.gov.caixa.hackaton.dto.telemetria.TelemetriaDTO;
 import br.gov.caixa.hackaton.entity.local.Telemetria;
 import br.gov.caixa.hackaton.repository.local.TelemetriaRepository;
+import br.gov.caixa.hackaton.service.TelemetriaService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class TelemetriaService {
+public class TelemetriaServiceImpl implements TelemetriaService {
 
     private TelemetriaRepository telemetriaRepositoty;
 

@@ -10,7 +10,7 @@ import br.gov.caixa.hackaton.entity.remote.Produto;
 import br.gov.caixa.hackaton.exception.ProdutoNaoEncontradoException;
 import br.gov.caixa.hackaton.repository.local.SimulacaoRepository;
 import br.gov.caixa.hackaton.repository.remote.ProdutoRepository;
-import br.gov.caixa.hackaton.service.implementation.SimulacaoService;
+import br.gov.caixa.hackaton.service.implementation.SimulacaoServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -35,7 +35,7 @@ public class SimulacaoServiceTest {
     private ProdutoRepository produtoRepository;
 
     @InjectMocks
-    private SimulacaoService service;
+    private SimulacaoServiceImpl service;
 
     private static final Integer COD_PRODUTO = 123;
     private static final Integer ID_SIMULACAO = 12213;

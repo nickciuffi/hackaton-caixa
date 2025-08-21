@@ -1,7 +1,7 @@
 package br.gov.caixa.hackaton.interceptor;
 
 import br.gov.caixa.hackaton.dto.telemetria.TelemetriaDTO;
-import br.gov.caixa.hackaton.service.implementation.TelemetriaService;
+import br.gov.caixa.hackaton.service.implementation.TelemetriaServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
@@ -13,7 +13,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 @AllArgsConstructor
 public class TelemetriaInterceptor implements HandlerInterceptor {
 
-    private TelemetriaService telemetriaService;
+    private TelemetriaServiceImpl telemetriaService;
 
     private static final String START_TIME = "startTime";
 

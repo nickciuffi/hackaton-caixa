@@ -8,7 +8,7 @@ import br.gov.caixa.hackaton.dto.simulacao.SimulacaoRequestDTO;
 import br.gov.caixa.hackaton.dto.simulacao.SimulacaoResponseDTO;
 import br.gov.caixa.hackaton.dto.simulacao.data_prod.SimulacaoPorDataEProdRequestDTO;
 import br.gov.caixa.hackaton.dto.simulacao.data_prod.SimulacaoPorDataEProdResponseDTO;
-import br.gov.caixa.hackaton.service.implementation.SimulacaoService;
+import br.gov.caixa.hackaton.service.SimulacaoService;
 import br.gov.caixa.hackaton.utils.PaginacaoUtils;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
