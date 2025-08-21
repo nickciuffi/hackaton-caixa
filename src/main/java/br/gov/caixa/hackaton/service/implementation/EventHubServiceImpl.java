@@ -2,7 +2,6 @@ package br.gov.caixa.hackaton.service.implementation;
 
 import br.gov.caixa.hackaton.config.eventhub.EventHubConfiguration;
 import br.gov.caixa.hackaton.exception.ConversaoJsonException;
-import br.gov.caixa.hackaton.exception.EnviarEventSenderException;
 import br.gov.caixa.hackaton.exception.EventSenderNaoInicializado;
 import br.gov.caixa.hackaton.service.EventSenderService;
 import com.azure.messaging.eventhubs.*;
@@ -15,18 +14,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class EventHubServiceImpl implements EventSenderService {
 
-    private EventHubProducerAsyncClient producer;
-    private CreateBatchOptions options;
+    private final EventHubProducerAsyncClient producer;
+    private final CreateBatchOptions options;
 
-    private ObjectMapper objectMapper;
-
-    private EventHubConfiguration properties;
+    private final ObjectMapper objectMapper;
 
     public EventHubServiceImpl(@Qualifier("eventHubConfiguration") EventHubConfiguration properties) {
-        this.properties = properties;
 
+        String connectionString = properties.getConnectionString();
         this.producer = new EventHubClientBuilder()
-                .connectionString(properties.getConnectionString())
+                .connectionString(connectionString)
                 .buildAsyncProducerClient();
 
         this.options = new CreateBatchOptions();
@@ -43,11 +40,7 @@ public class EventHubServiceImpl implements EventSenderService {
 
                 batch.tryAdd(new EventData(dadosJson));
 
-                producer.send(batch).subscribe(unused -> {
-                    System.out.println("Sucesso" + unused);
-                }, error -> {
-                    throw new EnviarEventSenderException();
-                });
+                producer.send(batch).subscribe();
             });
         }
         catch(JsonProcessingException e){

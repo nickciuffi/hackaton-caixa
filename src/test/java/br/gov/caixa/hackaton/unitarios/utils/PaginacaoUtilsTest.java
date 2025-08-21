@@ -1,6 +1,7 @@
-package br.gov.caixa.hackaton.utils;
+package br.gov.caixa.hackaton.unitarios.utils;
 
 import br.gov.caixa.hackaton.dto.PaginacaoDTO;
+import br.gov.caixa.hackaton.utils.PaginacaoUtils;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class PaginacaoUtilsTest {
+class PaginacaoUtilsTest {
 
     @Test
     void gerarPaginacaoTest1(){

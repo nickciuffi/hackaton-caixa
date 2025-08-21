@@ -33,9 +33,7 @@ public class TelemetriaServiceImpl implements TelemetriaService {
         List<Object[]> resObj = telemetriaRepositoty.consultarTelemetriaPorData(dataReq);
         List<ConsultarTelemetriaDTO> res = new ArrayList<>();
 
-        resObj.forEach(obj -> {
-            res.add(ConsultarTelemetriaDTO.fromEntity(obj));
-        });;
+        resObj.forEach(obj -> res.add(ConsultarTelemetriaDTO.fromEntity(obj)));
 
         return ConsultarTelemetriaResponseDTO.builder().dataReferencia(data).listaEndpoints(res).build();
     }

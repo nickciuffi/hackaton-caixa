@@ -1,4 +1,4 @@
-package br.gov.caixa.hackaton.service;
+package br.gov.caixa.hackaton.unitarios.service;
 
 import br.gov.caixa.hackaton.dto.telemetria.ConsultarTelemetriaResponseDTO;
 import br.gov.caixa.hackaton.dto.telemetria.TelemetriaDTO;
@@ -19,7 +19,7 @@ import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-public class TelemetriaServiceTest {
+class TelemetriaServiceTest {
 
     @Mock
     private TelemetriaRepository telemetriaRepository;

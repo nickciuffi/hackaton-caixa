@@ -30,7 +30,7 @@ public class SimulacaoController {
         return ResponseEntity.ok().body(new ApiResponse<SimulacaoResponseDTO>(res, "Simulação realizada com sucesso!"));
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<ApiResponse<PaginacaoDTO<SimulacaoDTO>>> consultarSimulacoesComPaginacao(@Valid @ModelAttribute ConsultarSimulacoesRequestDTO req){
         List<SimulacaoDTO> res = simulacaoService.consultarSimulacoes();
         PaginacaoDTO<SimulacaoDTO> resPaginado = PaginacaoUtils.gerarPaginacao(res, req.getPagina(), req.getQtdRegistrosPagina());

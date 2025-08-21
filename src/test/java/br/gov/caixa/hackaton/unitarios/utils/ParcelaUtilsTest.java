@@ -1,6 +1,7 @@
-package br.gov.caixa.hackaton.utils;
+package br.gov.caixa.hackaton.unitarios.utils;
 
 import br.gov.caixa.hackaton.dto.simulacao.ParcelaDTO;
+import br.gov.caixa.hackaton.utils.ParcelaUtils;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;

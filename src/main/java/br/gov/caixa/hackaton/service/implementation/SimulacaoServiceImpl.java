@@ -14,7 +14,6 @@ import br.gov.caixa.hackaton.service.SimulacaoService;
 import br.gov.caixa.hackaton.strategy.CalculadorParcelas;
 import br.gov.caixa.hackaton.strategy.PRICEStrategy;
 import br.gov.caixa.hackaton.strategy.SACStrategy;
-import br.gov.caixa.hackaton.utils.ParcelaUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -87,10 +86,7 @@ public class SimulacaoServiceImpl implements SimulacaoService {
     private List<ResultadoSimulacaoDTO> cadastrarSimulacoes(List<ResultadoSimulacaoDTO> simulacoes, SimulacaoRequestDTO req, Produto prod){
         for(ResultadoSimulacaoDTO simulacao : simulacoes){
 
-            Simulacao simulacaoEnt = new Simulacao(
-                    req.getValorDesejado(), req.getPrazo(), ParcelaUtils.calcularTotalParcelas(simulacao.getParcelas()),
-                    simulacao.getTipo(), LocalDate.now(), prod.getCoProduto(), prod.getNoProduto(),
-                    ParcelaUtils.calcularMediaPrestacao(simulacao.getParcelas()), prod.getPcTaxaJuros());
+            Simulacao simulacaoEnt = new Simulacao(simulacao, req, prod);
 
             Simulacao simulacaoSalva = simulacaoRepository.save(simulacaoEnt);
             simulacao.setIdSimulacao(simulacaoSalva.getIdSimulacao());

@@ -1,7 +1,6 @@
 package br.gov.caixa.hackaton.exception;
 
 import br.gov.caixa.hackaton.dto.ApiResponse;
-import br.gov.caixa.hackaton.dto.simulacao.data_prod.SimulacaoPorDataEProdResponseDTO;
 import org.springframework.dao.InvalidDataAccessResourceUsageException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

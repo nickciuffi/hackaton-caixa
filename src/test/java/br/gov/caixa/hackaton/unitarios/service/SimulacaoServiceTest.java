@@ -1,4 +1,4 @@
-package br.gov.caixa.hackaton.service;
+package br.gov.caixa.hackaton.unitarios.service;
 
 import br.gov.caixa.hackaton.dto.simulacao.SimulacaoDTO;
 import br.gov.caixa.hackaton.dto.simulacao.SimulacaoRequestDTO;
@@ -10,6 +10,7 @@ import br.gov.caixa.hackaton.entity.remote.Produto;
 import br.gov.caixa.hackaton.exception.ProdutoNaoEncontradoException;
 import br.gov.caixa.hackaton.repository.local.SimulacaoRepository;
 import br.gov.caixa.hackaton.repository.remote.ProdutoRepository;
+import br.gov.caixa.hackaton.service.EventSenderService;
 import br.gov.caixa.hackaton.service.implementation.SimulacaoServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -24,15 +25,17 @@ import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
 
-
 @SpringBootTest
-public class SimulacaoServiceTest {
+class SimulacaoServiceTest {
 
     @Mock
     private SimulacaoRepository simulacaoRepository;
 
     @Mock
     private ProdutoRepository produtoRepository;
+
+    @Mock
+    private EventSenderService eventSenderService;
 
     @InjectMocks
     private SimulacaoServiceImpl service;
@@ -88,6 +91,7 @@ public class SimulacaoServiceTest {
 
         when(produtoRepository.buscarProdutoParaSimulacao(any(), any())).thenReturn(prodEnt);
         when(simulacaoRepository.save(any())).thenReturn(simulacaoEnt);
+        doNothing().when(eventSenderService).enviar(any());
 
         SimulacaoResponseDTO res = service.realizarSimulacao(req);
 

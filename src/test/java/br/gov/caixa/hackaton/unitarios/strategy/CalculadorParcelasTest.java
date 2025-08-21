@@ -1,6 +1,9 @@
-package br.gov.caixa.hackaton.strategy;
+package br.gov.caixa.hackaton.unitarios.strategy;
 
 import br.gov.caixa.hackaton.dto.simulacao.ParcelaDTO;
+import br.gov.caixa.hackaton.strategy.CalculadorParcelas;
+import br.gov.caixa.hackaton.strategy.PRICEStrategy;
+import br.gov.caixa.hackaton.strategy.SACStrategy;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;

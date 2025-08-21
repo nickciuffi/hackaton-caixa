@@ -40,6 +40,7 @@ public class LocalJPAConfiguration {
     PlatformTransactionManager localTransactionManager(
             @Qualifier("localEntityManager") LocalContainerEntityManagerFactoryBean emfb
     ){
+        assert emfb.getObject() != null;
         return new JpaTransactionManager(emfb.getObject());
     }
 }

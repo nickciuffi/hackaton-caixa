@@ -12,6 +12,7 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 
     private TelemetriaInterceptor telemetriaInterceptor;
 
+    @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(telemetriaInterceptor);
     }

@@ -40,6 +40,7 @@ public class RemoteJPAConfiguration {
     PlatformTransactionManager remoteTransactionManager(
             @Qualifier("remoteEntityManager") LocalContainerEntityManagerFactoryBean emfb
     ){
+        assert emfb.getObject() != null;
         return new JpaTransactionManager(emfb.getObject());
     }
 }

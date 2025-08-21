@@ -1,5 +1,9 @@
 package br.gov.caixa.hackaton.entity.local;
 
+import br.gov.caixa.hackaton.dto.simulacao.ResultadoSimulacaoDTO;
+import br.gov.caixa.hackaton.dto.simulacao.SimulacaoRequestDTO;
+import br.gov.caixa.hackaton.entity.remote.Produto;
+import br.gov.caixa.hackaton.utils.ParcelaUtils;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -46,7 +50,9 @@ public class Simulacao {
     @Column(name = "PC_TAXA_JUROS", precision = 10, scale = 9)
     private BigDecimal pcTaxaJuros;
 
-    public Simulacao(BigDecimal valorDesejado, Integer prazo, BigDecimal valorTotalParcelas, String tipo, LocalDate dataSimulacao, Integer coProduto, String noProduto, BigDecimal valorMedioPrestacao, BigDecimal pcTaxaJuros){
-        this(null, valorDesejado, prazo, valorTotalParcelas, tipo, dataSimulacao, coProduto, noProduto, valorMedioPrestacao, pcTaxaJuros);
+    public Simulacao(ResultadoSimulacaoDTO simulacao, SimulacaoRequestDTO req, Produto prod){
+        this(null, req.getValorDesejado(), req.getPrazo(), ParcelaUtils.calcularTotalParcelas(simulacao.getParcelas()),
+                simulacao.getTipo(), LocalDate.now(), prod.getCoProduto(), prod.getNoProduto(),
+                ParcelaUtils.calcularMediaPrestacao(simulacao.getParcelas()), prod.getPcTaxaJuros());
     }
 }
