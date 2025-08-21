@@ -1,4 +1,4 @@
-package br.gov.caixa.hackaton.config;
+package br.gov.caixa.hackaton.config.db;
 
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;

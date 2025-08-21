@@ -1,11 +1,9 @@
 package br.gov.caixa.hackaton.controller;
 
 import br.gov.caixa.hackaton.dto.ApiResponse;
-import br.gov.caixa.hackaton.dto.simulacao.data_prod.SimulacaoPorDataEProdRequestDTO;
-import br.gov.caixa.hackaton.dto.simulacao.data_prod.SimulacaoPorDataEProdResponseDTO;
 import br.gov.caixa.hackaton.dto.telemetria.ConsultarTelemetriaRequestDTO;
 import br.gov.caixa.hackaton.dto.telemetria.ConsultarTelemetriaResponseDTO;
-import br.gov.caixa.hackaton.service.TelemetriaService;
+import br.gov.caixa.hackaton.service.implementation.TelemetriaService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;

@@ -2,13 +2,11 @@ package br.gov.caixa.hackaton.dto.simulacao.data_prod;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import lombok.Builder;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.time.LocalDate;
 
 @Data
+@Builder
 public class SimulacaoPorDataEProdRequestDTO {
 
     @NotNull(message = "dataReferencia é um campo obrigatório")

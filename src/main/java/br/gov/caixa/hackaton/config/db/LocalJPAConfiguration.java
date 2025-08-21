@@ -1,4 +1,4 @@
-package br.gov.caixa.hackaton.config;
+package br.gov.caixa.hackaton.config.db;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;

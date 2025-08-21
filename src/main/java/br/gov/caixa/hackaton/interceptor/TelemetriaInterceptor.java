@@ -1,7 +1,7 @@
 package br.gov.caixa.hackaton.interceptor;
 
 import br.gov.caixa.hackaton.dto.telemetria.TelemetriaDTO;
-import br.gov.caixa.hackaton.service.TelemetriaService;
+import br.gov.caixa.hackaton.service.implementation.TelemetriaService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;

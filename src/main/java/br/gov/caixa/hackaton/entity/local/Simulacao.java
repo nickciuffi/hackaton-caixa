@@ -1,10 +1,7 @@
 package br.gov.caixa.hackaton.entity.local;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -13,6 +10,7 @@ import java.time.LocalDate;
 @Table(name = "simulacoes")
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Data
 public class Simulacao {
 

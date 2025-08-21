@@ -1,4 +1,4 @@
-package br.gov.caixa.hackaton.service;
+package br.gov.caixa.hackaton.service.implementation;
 
 import br.gov.caixa.hackaton.dto.simulacao.*;
 import br.gov.caixa.hackaton.dto.simulacao.data_prod.SimulacaoPorDataEProdRequestDTO;
@@ -9,6 +9,7 @@ import br.gov.caixa.hackaton.exception.NenhumaSimulacaoEncontradaException;
 import br.gov.caixa.hackaton.exception.ProdutoNaoEncontradoException;
 import br.gov.caixa.hackaton.repository.local.SimulacaoRepository;
 import br.gov.caixa.hackaton.repository.remote.ProdutoRepository;
+import br.gov.caixa.hackaton.service.EventSenderService;
 import br.gov.caixa.hackaton.strategy.CalculadorParcelas;
 import br.gov.caixa.hackaton.strategy.PRICEStrategy;
 import br.gov.caixa.hackaton.strategy.SACStrategy;
@@ -30,6 +31,9 @@ public class SimulacaoService {
 
     private SimulacaoRepository simulacaoRepository;
 
+    private EventSenderService eventSenderService;
+
+
     public SimulacaoResponseDTO realizarSimulacao(SimulacaoRequestDTO req){
 
         Produto prodAdequado = produtoRepository.buscarProdutoParaSimulacao(req.getPrazo(), req.getValorDesejado());
@@ -44,13 +48,17 @@ public class SimulacaoService {
                 prodAdequado
         );
 
-        return SimulacaoResponseDTO
+        SimulacaoResponseDTO dto = SimulacaoResponseDTO
                 .builder()
                 .resultadosSimulacao(resultados)
                 .codigoProduto(prodAdequado.getCoProduto())
                 .descricaoProduto(prodAdequado.getNoProduto())
                 .taxaJuros(prodAdequado.getPcTaxaJuros())
                 .build();
+
+        eventSenderService.enviar(dto);
+
+        return dto;
     }
 
     public List<SimulacaoDTO> consultarSimulacoes(){

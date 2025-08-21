@@ -1,4 +1,4 @@
-package br.gov.caixa.hackaton.config;
+package br.gov.caixa.hackaton.config.interceptor;
 
 import br.gov.caixa.hackaton.interceptor.TelemetriaInterceptor;
 import lombok.AllArgsConstructor;
@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @AllArgsConstructor
 @Configuration
-public class InterceptorConfig implements WebMvcConfigurer {
+public class InterceptorConfiguration implements WebMvcConfigurer {
 
     private TelemetriaInterceptor telemetriaInterceptor;
 

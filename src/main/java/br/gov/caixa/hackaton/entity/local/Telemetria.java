@@ -1,6 +1,6 @@
 package br.gov.caixa.hackaton.entity.local;
 
-import br.gov.caixa.hackaton.config.LocalDatasourceConfiguration;
+import br.gov.caixa.hackaton.dto.telemetria.TelemetriaDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,5 +34,16 @@ public class Telemetria {
 
     @Column(name = "NO_METODO_HTTP")
     private String metodoHttp;
+
+    public static Telemetria fromDto(TelemetriaDTO dto){
+        return Telemetria
+                .builder()
+                .nomeApi(dto.getNomeApi())
+                .tempoExecucao(dto.getTempoExecucao())
+                .isSucesso(dto.isSucesso())
+                .dataTelemetria(LocalDate.now())
+                .metodoHttp(dto.getMethodoHttp())
+                .build();
+    }
 
 }

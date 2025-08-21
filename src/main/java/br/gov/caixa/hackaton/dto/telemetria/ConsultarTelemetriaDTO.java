@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 @Data
 @AllArgsConstructor
@@ -24,4 +25,18 @@ public class ConsultarTelemetriaDTO {
     private Long tempoMaximo;
 
     private BigDecimal percentualSucesso;
+
+    public static ConsultarTelemetriaDTO fromEntity(Object[] ent){
+        BigDecimal percentualSucesso = (BigDecimal) ent[6];
+        return ConsultarTelemetriaDTO
+                .builder()
+                .nomeApi((String) ent[0])
+                .metodoHttp((String) ent[1])
+                .qtdRequisicoes((Long) ent[2])
+                .tempoMedio((BigDecimal) ent[3])
+                .tempoMinimo((Long) ent[4])
+                .tempoMaximo((Long) ent[5])
+                .percentualSucesso(percentualSucesso.setScale(2, RoundingMode.UP))
+                .build();
+    }
 }
