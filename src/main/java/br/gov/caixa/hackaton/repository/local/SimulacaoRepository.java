@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface SimulacaoRepository extends JpaRepository<Simulacao, Integer> {
 
-    @Query(value = "select * from simulacoes s where s.co_produto = ?1 and s.dt_simulacao = ?2", nativeQuery = true)
+    @Query(value = "select s from Simulacao s where s.coProduto = ?1 and s.dataSimulacao = ?2")
     public List<Simulacao> findSimulacaoPorDataEProduto(Integer produto, LocalDate data);
 }

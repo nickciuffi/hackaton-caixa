@@ -1,5 +1,6 @@
 package br.gov.caixa.hackaton.service;
 
+import br.gov.caixa.hackaton.dto.simulacao.ConsultarSimulacoesRequestDTO;
 import br.gov.caixa.hackaton.dto.simulacao.SimulacaoDTO;
 import br.gov.caixa.hackaton.dto.simulacao.SimulacaoRequestDTO;
 import br.gov.caixa.hackaton.dto.simulacao.SimulacaoResponseDTO;
@@ -12,7 +13,7 @@ public interface SimulacaoService {
 
     public SimulacaoResponseDTO realizarSimulacao(SimulacaoRequestDTO req);
 
-    public List<SimulacaoDTO> consultarSimulacoes();
+    public List<SimulacaoDTO> consultarSimulacoes(ConsultarSimulacoesRequestDTO req);
 
     public List<SimulacaoPorDataEProdDTO> consultarSimulacoesPorDataEProd(SimulacaoPorDataEProdRequestDTO req);
 

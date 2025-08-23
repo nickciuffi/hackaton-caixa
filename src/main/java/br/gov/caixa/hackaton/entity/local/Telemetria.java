@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "telemetria")
+@Table(name = "TB03_TELEMETRIA")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -17,8 +17,8 @@ public class Telemetria {
 
     @Id
     @Column(name = "ID_TELEMETRIA")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Integer idTelemetria;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long idTelemetria;
 
     @Column(name = "NO_API")
     private String nomeApi;

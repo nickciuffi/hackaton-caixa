@@ -33,7 +33,7 @@ public class ConsultarTelemetriaDTO {
                 .nomeApi((String) ent[0])
                 .metodoHttp((String) ent[1])
                 .qtdRequisicoes((Long) ent[2])
-                .tempoMedio((BigDecimal) ent[3])
+                .tempoMedio(new BigDecimal(String.valueOf(ent[3])))
                 .tempoMinimo((Long) ent[4])
                 .tempoMaximo((Long) ent[5])
                 .percentualSucesso(percentualSucesso.setScale(2, RoundingMode.UP))

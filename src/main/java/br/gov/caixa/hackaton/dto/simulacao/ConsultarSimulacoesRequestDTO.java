@@ -1,5 +1,6 @@
 package br.gov.caixa.hackaton.dto.simulacao;
 
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -17,4 +18,9 @@ public class ConsultarSimulacoesRequestDTO {
     @NotNull(message = "O campo 'qtdRegistrosPagina' é obrigatório.")
     @Min(value = 1, message = "O campo 'qtdRegistrosPagina' deve ser maior que zero.")
     private Integer qtdRegistrosPagina;
+
+    @NotNull(message = "O campo 'mostrarParcelas' é obrigatório.")
+    @Max(value = 1, message = "O campo 'mostrarParcelas' deve ter o valor 0 ou 1")
+    @Min(value = 0, message = "O campo 'mostrarParcelas' deve ter o valor 0 ou 1")
+    private Integer mostrarParcelas;
 }

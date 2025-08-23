@@ -2,10 +2,7 @@ package br.gov.caixa.hackaton.controller;
 
 import br.gov.caixa.hackaton.dto.ApiResponse;
 import br.gov.caixa.hackaton.dto.PaginacaoDTO;
-import br.gov.caixa.hackaton.dto.simulacao.ConsultarSimulacoesRequestDTO;
-import br.gov.caixa.hackaton.dto.simulacao.SimulacaoDTO;
-import br.gov.caixa.hackaton.dto.simulacao.SimulacaoRequestDTO;
-import br.gov.caixa.hackaton.dto.simulacao.SimulacaoResponseDTO;
+import br.gov.caixa.hackaton.dto.simulacao.*;
 import br.gov.caixa.hackaton.dto.simulacao.data_prod.SimulacaoPorDataEProdRequestDTO;
 import br.gov.caixa.hackaton.dto.simulacao.data_prod.SimulacaoPorDataEProdResponseDTO;
 import br.gov.caixa.hackaton.service.SimulacaoService;
@@ -32,7 +29,7 @@ public class SimulacaoController {
 
     @GetMapping("")
     public ResponseEntity<ApiResponse<PaginacaoDTO<SimulacaoDTO>>> consultarSimulacoesComPaginacao(@Valid @ModelAttribute ConsultarSimulacoesRequestDTO req){
-        List<SimulacaoDTO> res = simulacaoService.consultarSimulacoes();
+        List<SimulacaoDTO> res = simulacaoService.consultarSimulacoes(req);
         PaginacaoDTO<SimulacaoDTO> resPaginado = PaginacaoUtils.gerarPaginacao(res, req.getPagina(), req.getQtdRegistrosPagina());
         return ResponseEntity.ok()
                 .body(new ApiResponse<>(

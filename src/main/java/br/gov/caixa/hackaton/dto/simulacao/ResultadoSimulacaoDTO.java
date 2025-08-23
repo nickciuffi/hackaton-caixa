@@ -11,7 +11,7 @@ import java.util.List;
 public class ResultadoSimulacaoDTO {
     @NonNull
     private String tipo;
-    private Integer idSimulacao;
+    private Long idSimulacao;
     @NonNull
     private List<ParcelaDTO> parcelas;
 }

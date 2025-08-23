@@ -9,9 +9,11 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "simulacoes")
+@Table(name = "TB01_SIMULACOES")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -20,8 +22,8 @@ public class Simulacao {
 
     @Id
     @Column(name = "ID_SIMULACAO")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Integer idSimulacao;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long idSimulacao;
 
     @Column(name = "VR_DESEJADO", precision = 18, scale = 2)
     private BigDecimal valorDesejado;
@@ -50,9 +52,12 @@ public class Simulacao {
     @Column(name = "PC_TAXA_JUROS", precision = 10, scale = 9)
     private BigDecimal pcTaxaJuros;
 
+    @OneToMany(mappedBy = "simulacao", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Parcela> parcelas = new ArrayList<>();
+
     public Simulacao(ResultadoSimulacaoDTO simulacao, SimulacaoRequestDTO req, Produto prod){
         this(null, req.getValorDesejado(), req.getPrazo(), ParcelaUtils.calcularTotalParcelas(simulacao.getParcelas()),
                 simulacao.getTipo(), LocalDate.now(), prod.getCoProduto(), prod.getNoProduto(),
-                ParcelaUtils.calcularMediaPrestacao(simulacao.getParcelas()), prod.getPcTaxaJuros());
+                ParcelaUtils.calcularMediaPrestacao(simulacao.getParcelas()), prod.getPcTaxaJuros(), new ArrayList<>());
     }
 }

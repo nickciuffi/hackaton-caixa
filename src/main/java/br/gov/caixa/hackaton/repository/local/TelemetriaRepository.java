@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface TelemetriaRepository extends JpaRepository<Telemetria, Integer> {
 
-    @Query(value = "select t.no_api as nomeApi, t.no_metodo_http as metodoHttp, COUNT(t.id_telemetria) as qtdRequisicoes, ROUND(AVG(t.ts_tempo_execucao), 2) as tempoMedio, MIN(t.ts_tempo_execucao) as tempoMinimo, MAX(t.ts_tempo_execucao) as tempoMaximo, (SUM(t.ic_sucesso) / COUNT(t.id_telemetria)) as percentualSucesso from telemetria t where t.dt_telemetria = ?1 group by t.no_api, t.no_metodo_http order by qtdRequisicoes desc", nativeQuery = true)
+    @Query(value = "select t.nomeApi as nomeApi, t.metodoHttp as metodoHttp, COUNT(t.idTelemetria) as qtdRequisicoes, ROUND(AVG(t.tempoExecucao), 2) as tempoMedio, MIN(t.tempoExecucao) as tempoMinimo, MAX(t.tempoExecucao) as tempoMaximo, (SUM(t.isSucesso) / COUNT(t.idTelemetria)) as percentualSucesso from Telemetria t where t.dataTelemetria = ?1 group by t.nomeApi, t.metodoHttp order by qtdRequisicoes desc")
     public List<Object[]> consultarTelemetriaPorData(LocalDate data);
 }

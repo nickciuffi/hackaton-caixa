@@ -3,6 +3,7 @@ package br.gov.caixa.hackaton.service.implementation;
 import br.gov.caixa.hackaton.dto.simulacao.*;
 import br.gov.caixa.hackaton.dto.simulacao.data_prod.SimulacaoPorDataEProdRequestDTO;
 import br.gov.caixa.hackaton.dto.simulacao.data_prod.SimulacaoPorDataEProdDTO;
+import br.gov.caixa.hackaton.entity.local.Parcela;
 import br.gov.caixa.hackaton.entity.local.Simulacao;
 import br.gov.caixa.hackaton.entity.remote.Produto;
 import br.gov.caixa.hackaton.exception.NenhumaSimulacaoEncontradaException;
@@ -60,10 +61,13 @@ public class SimulacaoServiceImpl implements SimulacaoService {
         return dto;
     }
 
-    public List<SimulacaoDTO> consultarSimulacoes(){
+    public List<SimulacaoDTO> consultarSimulacoes(ConsultarSimulacoesRequestDTO req){
         List<Simulacao> simulacoes = simulacaoRepository.findAll();
         List<SimulacaoDTO> dtos = new ArrayList<>();
         for(Simulacao simulacaoEnt : simulacoes){
+            if(req.getMostrarParcelas() == 0){
+                simulacaoEnt.setParcelas(null);
+            }
             dtos.add(SimulacaoDTO.fromEntity(simulacaoEnt));
         }
         return dtos;
@@ -77,6 +81,9 @@ public class SimulacaoServiceImpl implements SimulacaoService {
 
         List<SimulacaoPorDataEProdDTO> dtos = new ArrayList<>();
         for(Simulacao simulacaoEnt : simulacoesEnt){
+            if(req.getMostrarParcelas() == 0){
+                simulacaoEnt.setParcelas(null);
+            }
             dtos.add(SimulacaoPorDataEProdDTO.fromEntity(simulacaoEnt));
         }
 
@@ -87,6 +94,9 @@ public class SimulacaoServiceImpl implements SimulacaoService {
         for(ResultadoSimulacaoDTO simulacao : simulacoes){
 
             Simulacao simulacaoEnt = new Simulacao(simulacao, req, prod);
+            for(ParcelaDTO parcelaDTO : simulacao.getParcelas()){
+                simulacaoEnt.getParcelas().add(Parcela.fromDto(parcelaDTO, simulacaoEnt));
+            }
 
             Simulacao simulacaoSalva = simulacaoRepository.save(simulacaoEnt);
             simulacao.setIdSimulacao(simulacaoSalva.getIdSimulacao());
