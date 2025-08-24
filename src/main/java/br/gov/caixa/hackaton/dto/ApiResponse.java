@@ -12,18 +12,18 @@ public class ApiResponse<T> {
 
     private T response;
 
-    private List<String> message = new ArrayList<>();
+    private List<String> messages = new ArrayList<>();
 
     public ApiResponse(T response, String message) {
         this.response = response;
-        this.message.add(message);
+        this.messages.add(message);
     }
 
     public ApiResponse(String message) {
-        this.message.add(message);
+        this.messages.add(message);
     }
 
     public ApiResponse(List<String> message) {
-        this.message = message;
+        this.messages = message;
     }
 }

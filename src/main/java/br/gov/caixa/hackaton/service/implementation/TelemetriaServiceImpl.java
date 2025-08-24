@@ -4,6 +4,7 @@ import br.gov.caixa.hackaton.dto.telemetria.ConsultarTelemetriaDTO;
 import br.gov.caixa.hackaton.dto.telemetria.ConsultarTelemetriaResponseDTO;
 import br.gov.caixa.hackaton.dto.telemetria.TelemetriaDTO;
 import br.gov.caixa.hackaton.entity.local.Telemetria;
+import br.gov.caixa.hackaton.exception.TelemetriaNaoEncontradaException;
 import br.gov.caixa.hackaton.repository.local.TelemetriaRepository;
 import br.gov.caixa.hackaton.service.TelemetriaService;
 import lombok.AllArgsConstructor;
@@ -31,6 +32,8 @@ public class TelemetriaServiceImpl implements TelemetriaService {
         LocalDate dataReq = LocalDate.parse(data, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
 
         List<Object[]> resObj = telemetriaRepositoty.consultarTelemetriaPorData(dataReq);
+        if(resObj.isEmpty()) throw new TelemetriaNaoEncontradaException(data);
+
         List<ConsultarTelemetriaDTO> res = new ArrayList<>();
 
         resObj.forEach(obj -> res.add(ConsultarTelemetriaDTO.fromEntity(obj)));

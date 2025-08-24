@@ -1,5 +1,6 @@
 package br.gov.caixa.hackaton.dto.telemetria;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,6 +14,7 @@ import java.util.List;
 @Builder
 public class ConsultarTelemetriaResponseDTO {
 
+    @Schema(description = "Data das informações de telemetria consultadas", example = "23-08-2025")
     private String dataReferencia;
 
     private List<ConsultarTelemetriaDTO> listaEndpoints;

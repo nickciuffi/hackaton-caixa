@@ -28,7 +28,6 @@ public class RemoteJPAConfiguration {
     ){
         Map<String, Object> props = new HashMap<>();
         props.put("hibernate.hbm2ddl.auto", "none");
-        props.put("hibernate.dialect", "org.hibernate.dialect.SQLServer2012Dialect");
         return entityManagerFactoryBuilder
                 .dataSource(dataSource)
                 .packages("br.gov.caixa.hackaton.entity.remote")

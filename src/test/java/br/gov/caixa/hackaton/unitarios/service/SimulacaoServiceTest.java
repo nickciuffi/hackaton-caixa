@@ -1,5 +1,6 @@
 package br.gov.caixa.hackaton.unitarios.service;
 
+import br.gov.caixa.hackaton.dto.simulacao.ConsultarSimulacoesRequestDTO;
 import br.gov.caixa.hackaton.dto.simulacao.SimulacaoDTO;
 import br.gov.caixa.hackaton.dto.simulacao.SimulacaoRequestDTO;
 import br.gov.caixa.hackaton.dto.simulacao.SimulacaoResponseDTO;
@@ -16,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -26,6 +28,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
 
 @SpringBootTest
+@ActiveProfiles("test")
 class SimulacaoServiceTest {
 
     @Mock
@@ -41,7 +44,7 @@ class SimulacaoServiceTest {
     private SimulacaoServiceImpl service;
 
     private static final Integer COD_PRODUTO = 123;
-    private static final Integer ID_SIMULACAO = 12213;
+    private static final Long ID_SIMULACAO = 12213L;
     private static final String NO_PRODUTO = "Produto 1";
     private static final BigDecimal TAXA_JUROS = new BigDecimal("0.0179");
     private static final BigDecimal VALOR_DESEJADO = new BigDecimal("1000.00");
@@ -140,8 +143,11 @@ class SimulacaoServiceTest {
         simulacoesEnt.add(simu1);
         simulacoesEnt.add(simu2);
 
+        ConsultarSimulacoesRequestDTO req = new ConsultarSimulacoesRequestDTO();
+        req.setMostrarParcelas(0);
+
         when(simulacaoRepository.findAll()).thenReturn(simulacoesEnt);
-        List<SimulacaoDTO> res = service.consultarSimulacoes();
+        List<SimulacaoDTO> res = service.consultarSimulacoes(req);
 
         assertNotNull(res);
         assertEquals(2, res.size());
@@ -157,6 +163,7 @@ class SimulacaoServiceTest {
                 .builder()
                 .dataReferencia(DATA_CORRETA)
                 .codigoProduto(COD_PRODUTO)
+                .mostrarParcelas(0)
                 .build();
         Simulacao simu1 = this.gerarSimulacaoPorDataEProd();
         Simulacao simu2 = this.gerarSimulacaoPorDataEProd();

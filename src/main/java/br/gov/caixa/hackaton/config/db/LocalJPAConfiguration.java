@@ -28,7 +28,6 @@ public class LocalJPAConfiguration {
     ){
         Map<String, Object> props = new HashMap<>();
         props.put("hibernate.hbm2ddl.auto", "update");
-        props.put("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
         return entityManagerFactoryBuilder
                 .dataSource(dataSource)
                 .packages("br.gov.caixa.hackaton.entity.local")

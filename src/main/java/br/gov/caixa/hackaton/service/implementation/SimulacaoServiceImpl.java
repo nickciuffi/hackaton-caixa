@@ -63,6 +63,7 @@ public class SimulacaoServiceImpl implements SimulacaoService {
 
     public List<SimulacaoDTO> consultarSimulacoes(ConsultarSimulacoesRequestDTO req){
         List<Simulacao> simulacoes = simulacaoRepository.findAll();
+        if(simulacoes.isEmpty()) throw new NenhumaSimulacaoEncontradaException();
         List<SimulacaoDTO> dtos = new ArrayList<>();
         for(Simulacao simulacaoEnt : simulacoes){
             if(req.getMostrarParcelas() == 0){

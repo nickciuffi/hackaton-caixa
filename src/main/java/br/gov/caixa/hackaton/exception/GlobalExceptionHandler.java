@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -18,12 +19,17 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(ProdutoNaoEncontradoException.class)
     public ResponseEntity<ApiResponse<Object>> handleProdutoNaoEncontradoException(ProdutoNaoEncontradoException e) {
-        return ResponseEntity.badRequest().body(new ApiResponse<>(e.getMessage()));
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse<>(e.getMessage()));
     }
 
     @ExceptionHandler(NenhumaSimulacaoEncontradaException.class)
     public ResponseEntity<ApiResponse<Object>> handleProdutoNaoEncontradoException(NenhumaSimulacaoEncontradaException e) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse<>(e.getMessage()));
+    }
+
+    @ExceptionHandler(TelemetriaNaoEncontradaException.class)
+    public ResponseEntity<ApiResponse<Object>> handleProdutoNaoEncontradoException(TelemetriaNaoEncontradaException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse<>(e.getMessage()));
     }
 
     @ExceptionHandler(EventSenderNaoInicializado.class)
@@ -62,8 +68,14 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<>("Erro na consulta ao banco de dados"));
     }
 
+    @ExceptionHandler(NoResourceFoundException.class)
+    public ResponseEntity<ApiResponse<Object>> handleNoResourceFoundException(NoResourceFoundException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse<>("Endpoint não encontrado: " + e.getResourcePath()));
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse<Object>> handleGenericException(Exception ex) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<>("Erro interno do servidor."));
     }
+
 }

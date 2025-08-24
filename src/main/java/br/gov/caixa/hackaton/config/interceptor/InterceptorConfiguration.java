@@ -14,6 +14,13 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(telemetriaInterceptor);
+        registry.addInterceptor(telemetriaInterceptor)
+                .addPathPatterns("/**")
+                .excludePathPatterns(
+                        "/swagger-ui/**",
+                        "/v3/api-docs/**",
+                        "/telemetria/**",
+                        "/favicon.io"
+                );
     }
 }

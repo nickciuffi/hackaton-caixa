@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -27,6 +28,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@ActiveProfiles("test")
  class SimulacaoControllerTest {
 
     @Autowired
@@ -41,7 +43,7 @@ import static org.junit.jupiter.api.Assertions.*;
     private static final BigDecimal VALOR_DESEJADO = new BigDecimal("9000");
     private static final Integer PRAZO = 20;
     private static final BigDecimal VALOR_TOTAL = new BigDecimal("1200.00");
-    private static final Integer ID_SIMULACAO = 123;
+    private static final Long ID_SIMULACAO = 123L;
     private static final String TIPO_SIMULACAO_SAC = "SAC";
     private static final String TIPO_SIMULACAO_PRICE = "PRICE";
 
@@ -109,9 +111,9 @@ import static org.junit.jupiter.api.Assertions.*;
                 .build();
 
         List<SimulacaoDTO> resService =  new ArrayList<>(Arrays.asList(sim1, sim2));
-        when(simulacaoService.consultarSimulacoes()).thenReturn(resService);
+        when(simulacaoService.consultarSimulacoes(any())).thenReturn(resService);
 
-        MvcResult res = mockMvc.perform(get("/simulacao?pagina=2&qtdRegistrosPagina=89")
+        MvcResult res = mockMvc.perform(get("/simulacao?pagina=2&qtdRegistrosPagina=89&mostrarParcelas=0")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(""))
                 .andExpect(status().isOk())
@@ -133,7 +135,7 @@ import static org.junit.jupiter.api.Assertions.*;
     @Test
     void retornoSucessoParaEndpointConsultarSimulacoesPorDataEProdTest() throws Exception {
 
-        MvcResult res = mockMvc.perform(get("/simulacao/prod-data?codigoProduto=1&dataReferencia=21-08-2025")
+        MvcResult res = mockMvc.perform(get("/simulacao/prod-data?codigoProduto=1&dataReferencia=21-08-2025&mostrarParcelas=1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(""))
                 .andExpect(status().isOk())
