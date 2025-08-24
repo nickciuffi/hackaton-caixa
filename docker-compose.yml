@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  mysql-db:
+    image: mysql:8.1
+    container_name: hackaton-mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: Password23
+      MYSQL_DATABASE: hack
+      MYSQL_USER: hack
+      MYSQL_PASSWORD: Password23
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - hackaton-network
+
+  spring-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: hackaton-app
+    depends_on:
+      - mysql-db
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"
+    networks:
+      - hackaton-network
+
+volumes:
+  mysql-data:
+
+networks:
+  hackaton-network:

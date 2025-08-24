@@ -1,37 +1,20 @@
 package br.gov.caixa.hackaton.service;
 
+import br.gov.caixa.hackaton.dto.simulacao.ConsultarSimulacoesRequestDTO;
+import br.gov.caixa.hackaton.dto.simulacao.SimulacaoDTO;
 import br.gov.caixa.hackaton.dto.simulacao.SimulacaoRequestDTO;
 import br.gov.caixa.hackaton.dto.simulacao.SimulacaoResponseDTO;
-import br.gov.caixa.hackaton.entity.Produto;
-import br.gov.caixa.hackaton.exception.ProdutoNaoEncontradoException;
-import br.gov.caixa.hackaton.repository.ProdutoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import br.gov.caixa.hackaton.dto.simulacao.data_prod.SimulacaoPorDataEProdDTO;
+import br.gov.caixa.hackaton.dto.simulacao.data_prod.SimulacaoPorDataEProdRequestDTO;
 
-import java.util.ArrayList;
+import java.util.List;
 
-@Service
-public class SimulacaoService {
+public interface SimulacaoService {
 
-    @Autowired
-    private ProdutoRepository produtoRepository;
+    public SimulacaoResponseDTO realizarSimulacao(SimulacaoRequestDTO req);
 
-    public SimulacaoResponseDTO realizarSimulacao(SimulacaoRequestDTO req){
+    public List<SimulacaoDTO> consultarSimulacoes(ConsultarSimulacoesRequestDTO req);
 
-        Produto prodAdequado = produtoRepository.BuscarProdutoParaSimulacao(req.getPrazo(), req.getValorDesejado());
+    public List<SimulacaoPorDataEProdDTO> consultarSimulacoesPorDataEProd(SimulacaoPorDataEProdRequestDTO req);
 
-        if(prodAdequado == null) {
-            throw new ProdutoNaoEncontradoException();
-        }
-        SimulacaoResponseDTO res = SimulacaoResponseDTO
-                .builder()
-                .idSimulacao(123)
-                .resultadosSimulacao(new ArrayList<>())
-                .codigoProduto(prodAdequado.getCoProduto())
-                .descricaoProduto(prodAdequado.getNoProduto())
-                .taxaJuros(prodAdequado.getPcTaxaJuros())
-                .build();
-
-        return res;
-    }
 }
