@@ -22,3 +22,10 @@ API para geração de simulações de empréstimos para a população brasileira
 - Microsoft Eventhub
 - Lombok
 - Docker Compose (Execução da aplicação e do banco de dados local)
+
+## Como rodar o projeto
+- Tenha o docker-compose e o docker instalado na sua máquina
+- Execute o comando "docker-compose up" na pasta raiz da aplicação
+
+## Dica extra
+- é possível obter a collection do postman, com a aplicação rodando, no link: http://localhost:8080/collection
