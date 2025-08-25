@@ -8,6 +8,10 @@ import org.springframework.context.annotation.Primary;
 
 import javax.sql.DataSource;
 
+/*
+    Configuração de DataSource para o banco de dados remoto sql server
+ */
+
 @Configuration
 public class RemoteDatasourceConfiguration {
 

@@ -13,6 +13,10 @@ import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
 
+/*
+    Configuração de entity manager e transaction manager para o banco de dados local MySql
+ */
+
 @Configuration
 @EnableJpaRepositories(
         basePackages = "br.gov.caixa.hackaton.repository.local",

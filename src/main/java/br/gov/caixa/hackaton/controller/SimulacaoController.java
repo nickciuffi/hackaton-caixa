@@ -41,7 +41,7 @@ public class SimulacaoController {
     }
 
     @GetMapping("")
-    @Operation(summary = "Consultar simulacoes", description = "Consultar todas as simulações feitas, com paginação")
+    @Operation(summary = "Consultar simulações", description = "Consultar todas as simulações feitas, com paginação")
     @ApiResponses(value = {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Erro nos parâmetros.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErroNosParametrosSwaggerDTO.class))),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Nenhuma simulação encontrada!", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErroSimulacaoNaoEncontradaSwaggerDTO.class))),
@@ -58,7 +58,7 @@ public class SimulacaoController {
     }
 
     @GetMapping("/prod-data")
-    @Operation(summary = "Consultar simulacoes", description = "Consultar as simulações feitas, por data e produto")
+    @Operation(summary = "Consultar simulações", description = "Consultar as simulações feitas, por data e produto")
     @ApiResponses(value = {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Erro nos parâmetros.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErroNosParametrosSwaggerDTO.class))),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Nenhuma simulação encontrada!", content = @Content(mediaType = "application/json", schema = @Schema(implementation = RetornoDeErroSimulacaoNaoEncontradaSwaggerDTO.class))),

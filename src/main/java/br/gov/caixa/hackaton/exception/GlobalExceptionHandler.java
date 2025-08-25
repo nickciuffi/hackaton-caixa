@@ -14,6 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/*
+    Classe handler de exceptions. Centraliza em apenas uma classe todo o tratamento de erros da aplicação.
+ */
+
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
