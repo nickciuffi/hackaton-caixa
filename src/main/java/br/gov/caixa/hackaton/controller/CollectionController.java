@@ -11,6 +11,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/*
+    Endpoint criado apenas para tornar a collection do postman disponível no swagger da aplicação
+ */
+
 @RequestMapping("/collection")
 @RestController
 @AllArgsConstructor

@@ -6,6 +6,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/*
+    Configuração do WebMvc para adicionar o interceptor de telemetria
+ */
+
 @AllArgsConstructor
 @Configuration
 public class InterceptorConfiguration implements WebMvcConfigurer {
@@ -20,7 +24,8 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
                         "/swagger-ui/**",
                         "/v3/api-docs/**",
                         "/telemetria/**",
-                        "/favicon.io"
+                        "/favicon.io",
+                        "/collection"
                 );
     }
 }

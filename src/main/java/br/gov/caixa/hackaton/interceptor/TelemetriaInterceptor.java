@@ -9,6 +9,10 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+/*
+    Classe interceptor para capturar os dados de telemetria das chamadas dos endpoints
+ */
+
 @Component
 @AllArgsConstructor
 public class TelemetriaInterceptor implements HandlerInterceptor {
