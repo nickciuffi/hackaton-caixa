@@ -28,4 +28,4 @@ API para geração de simulações de empréstimos para a população brasileira
 - Execute o comando "docker-compose up" na pasta raiz da aplicação
 
 ## Dica extra
-- é possível obter a collection do postman, com a aplicação rodando, no link: http://localhost:8080/collection
+- É possível obter a collection do postman, com a aplicação rodando, no link: http://localhost:8080/collection
