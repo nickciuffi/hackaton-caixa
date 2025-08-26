@@ -15,6 +15,12 @@ services:
       - mysql-data:/var/lib/mysql
     networks:
       - hackaton-network
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-pPassword23" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
 
   spring-app:
     build:
@@ -22,7 +28,8 @@ services:
       dockerfile: Dockerfile
     container_name: hackaton-app
     depends_on:
-      - mysql-db
+      mysql-db:
+        condition: service_healthy
     env_file:
       - .env
     ports:
